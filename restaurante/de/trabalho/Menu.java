@@ -154,7 +154,7 @@ public class Menu {
                     String nomeIngrediente = scan.next();
 
                     Ingredientes ingrediente = new Ingredientes(nomeIngrediente);
-                    ingrediente.cadastrarIngrediente(arquivoIngredientes);
+                    ingrediente.cadastrarIngredientes(arquivoIngredientes);
                     System.out.println("Ingrediente cadastrado!");
                     break;
                 case 2:
