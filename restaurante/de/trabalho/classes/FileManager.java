@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager {
+    public static void criarDiretorio(File arquivo) throws IOException {
+        if(!arquivo.exists()) {
+            arquivo.mkdir();
+        }
+    }
+
      public static void criarArquivo(File arquivo) throws IOException {
         if(!arquivo.exists()) {
             arquivo.createNewFile();
@@ -65,4 +71,5 @@ public class FileManager {
         System.out.println("Item deletado com sucesso.");
     }
     
+   
 }

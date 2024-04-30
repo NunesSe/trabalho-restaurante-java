@@ -1,5 +1,9 @@
 package classes;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 // Criação da classe Funcionario com o atributos nome, CPF, salario e função e seus respectivos setters e getters
 public class Funcionario {
     private String nome;
@@ -43,4 +47,31 @@ public class Funcionario {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
+
+     public void cadastrarFuncionario(File arquivo) throws IOException {
+        if(!arquivo.exists()) {
+            FileManager.criarArquivo(arquivo);
+        } 
+        FileManager.escreverArquivo(arquivo, this.nome + ";" + this.cpf + ";" + this.salario + ";" + 
+        this.funcao, true);
+    }
+
+        public static void mostrarFuncionario(File arquivo) throws IOException {
+        ArrayList<String> resultado = FileManager.lerArquivo(arquivo);
+        int posicao = 1;
+        for (String string : resultado) {
+            String[] partes = string.split(";");
+            System.out.println("=========================================");
+            System.out.println("Posição: " + posicao);
+            System.out.println("Nome: " + partes[0]);
+            System.out.println("CPF: " + partes[1]);
+            System.out.println("SALARIO: " + partes[2]);
+            System.out.println("FUNÇÃO: " + partes[3]);
+            System.out.println("=========================================");
+            posicao++;
+        }
+    }
+        public static void deletarFuncionario(File arquivo, int posicao) throws IOException {
+            FileManager.deletarItem(arquivo, posicao);
+        }
 }

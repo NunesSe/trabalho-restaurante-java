@@ -5,14 +5,15 @@ import java.util.ArrayList;
 public class Pedido {
     private Cliente cliente;
     private Funcionario funcionario;
-    private ArrayList<Prato> pratos;
+    private ArrayList<Prato> prato;
+    private ArrayList<Bebida> bebida;
     private Double precoFinal;
 
-    public Pedido(Cliente cliente, Funcionario funcionario, ArrayList<Prato> pratos, Double precoFinal) {
+
+    public Pedido(Cliente cliente, Funcionario funcionario, ArrayList<Prato> prato) {
         this.cliente = cliente;
         this.funcionario = funcionario;
-        this.pratos = pratos;
-        this.precoFinal = precoFinal;
+        this.prato = prato;
     }
 
     public Cliente getCliente() {
@@ -24,12 +25,17 @@ public class Pedido {
     }
 
     public ArrayList<Prato> getPratos() {
-        return pratos;
+        return prato;
     }
 
     public Double getPrecoFinal() {
         return precoFinal;
     }
 
+    public ArrayList<Bebida> getBebida() {
+        return bebida;
+    }
+
+    
     
 }

@@ -1,7 +1,12 @@
 package classes;
 
+
 public class Ingredientes {
     private String nome;
+
+    public Ingredientes(String nome) {
+        this.nome = nome;
+    }
 
     public String getNome() {
         return nome;
@@ -10,4 +15,5 @@ public class Ingredientes {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 }
