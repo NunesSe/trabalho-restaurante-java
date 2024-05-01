@@ -41,7 +41,7 @@ public class Ingredientes {
         
         }
     }
-    // Deleta os ingredientes que nao estao disponiveis;
+    // Deleta os ingredientes 
     public static void deletarIngredientes(File arquivo, int posicao) throws IOException{
         FileManager.deletarItem(arquivo, posicao);
     }

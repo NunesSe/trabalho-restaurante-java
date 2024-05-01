@@ -46,6 +46,7 @@ public class FileManager {
         String linha = "";
         ArrayList<String> resultado = new ArrayList<String>();
         while((linha = bufferedReader.readLine()) != null) {
+            linha = linha.replace(";", "");
             resultado.add(linha);
         }
 
