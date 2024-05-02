@@ -50,6 +50,9 @@ public class Menu {
         File arquivoBebidas = new File("./arquivos/bebidas.txt");
         FileManager.criarArquivo(arquivoBebidas);
 
+        File arquivoPedidos = new File("./arquivos/pedidos.txt");
+        FileManager.criarArquivo(arquivoPedidos);
+
         int opcao = -1;
         while (opcao != 0) {
             // Linhas para limpar o terminal
@@ -78,7 +81,7 @@ public class Menu {
                     menuBebida(scan, arquivoBebidas);
                     break;
                 case 6:
-                    menuPedido(scan, arquivoFuncionario, arquivoCliente, arquivoPratos, arquivoBebidas);
+                    menuPedido(scan, arquivoPedidos, arquivoFuncionario, arquivoCliente, arquivoPratos, arquivoBebidas);
                     break;
                 default:
                     System.out.println("Opção inválida!");
@@ -357,7 +360,7 @@ public class Menu {
         } while (opcaoBebida != 0);
     }
 
-    public static void menuPedido(Scanner scan, File arquivoFuncionario, File arquivoCliente, File arquivoPratos,
+    public static void menuPedido(Scanner scan, File arquivoPedidos, File arquivoFuncionario, File arquivoCliente, File arquivoPratos,
             File arquivoBebidas) throws IOException {
         int opcaoPedido;
         do {
@@ -472,8 +475,8 @@ public class Menu {
                         System.out.println("Bebida adicionada");
                     } while (escolhaBebida != 0);
                     Pedido pedido = new Pedido(cliente, funcionario, pratos, bebidas);
-                    pedido.calcularPrecoFinal();
-                    System.out.println(pedido.getPrecoFinal());
+                    pedido.cadastrarPedidos(arquivoPedidos);
+                    System.out.println("Pedido cadastrado!");
                     break;
 
                 default:

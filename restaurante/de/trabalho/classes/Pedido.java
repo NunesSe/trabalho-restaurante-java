@@ -1,5 +1,7 @@
 package classes;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Pedido {
@@ -77,5 +79,22 @@ public class Pedido {
     }
 
 
-    
+    // Método para cadastrar pedidos em um arquivo
+    public void cadastrarPedidos(File arquivo) throws IOException {
+        if(!arquivo.exists()){
+            FileManager.criarArquivo(arquivo);
+        }
+        
+        String texto = this.cliente.getNome() + ";" + this.funcionario.getNome() + ";" + this.precoFinal;
+        texto = texto + "|";
+        for (Prato prato : pratos) {
+            texto = texto + ";" + prato.getNome();
+        }
+        texto = texto + "|";
+        for (Bebida bebida : bebidas) {
+            texto = texto + ";" + bebida.getNome();
+        }
+        
+        FileManager.escreverArquivo(arquivo, texto, true);
+    }
 }
