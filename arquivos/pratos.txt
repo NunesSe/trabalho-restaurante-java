@@ -1,1 +1,2 @@
 Classico;23.99;Carne;;Arroz;;Feij∆o;;Batata;
+Especial;12.99;Arroz;;Feij∆o;

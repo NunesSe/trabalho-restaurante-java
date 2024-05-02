@@ -13,7 +13,7 @@ import classes.Prato;
 
 public class Menu {
     public static void main(String[] args) throws IOException {
-        File caminho = new File("arquivos");
+        File caminho = new File("./arquivos");
         FileManager.criarDiretorio(caminho);
 
         escolhaMenu();
@@ -360,7 +360,8 @@ public class Menu {
         } while (opcaoBebida != 0);
     }
 
-    public static void menuPedido(Scanner scan, File arquivoPedidos, File arquivoFuncionario, File arquivoCliente, File arquivoPratos,
+    public static void menuPedido(Scanner scan, File arquivoPedidos, File arquivoFuncionario, File arquivoCliente,
+            File arquivoPratos,
             File arquivoBebidas) throws IOException {
         int opcaoPedido;
         do {
@@ -477,6 +478,18 @@ public class Menu {
                     Pedido pedido = new Pedido(cliente, funcionario, pratos, bebidas);
                     pedido.cadastrarPedidos(arquivoPedidos);
                     System.out.println("Pedido cadastrado!");
+                    break;
+                case 2:
+                    Pedido.mostrarPedidos(arquivoPedidos);
+                    break;
+                case 3:
+                    // Mostra os pedidos cadastrados
+                    Pedido.mostrarPedidos(arquivoPedidos);
+                    // Solicita a posição para deleatr
+                    System.out.println("Digite a posição do pedido que deseja excluir: ");
+                    int posicao = scan.nextInt() - 1;
+                    // Deleta o item do arquivo de texto
+                    FileManager.deletarItem(arquivoPedidos, posicao);
                     break;
 
                 default:
