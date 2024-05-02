@@ -60,7 +60,7 @@ public class Menu {
             System.out.flush();
 
             mostrarMenu();
-            opcao = scan.nextInt();
+            opcao = Integer.parseInt(scan.nextLine());
             switch (opcao) {
                 case 0:
                     System.out.println("Saindo");
@@ -98,14 +98,14 @@ public class Menu {
             System.out.println("[1] Cadastrar um cliente");
             System.out.println("[2] Ver clientes cadastrados");
             System.out.println("[3] Excluir um cliente");
-            opcaoCliente = scan.nextInt();
+            opcaoCliente = Integer.parseInt(scan.nextLine());
             switch (opcaoCliente) {
                 case 0:
                     System.out.println("Saindo");
                     break;
                 case 1:
                     System.out.println("Digite seu nome: ");
-                    String nome = scan.next();
+                    String nome = scan.nextLine();
 
                     Cliente cliente = new Cliente(nome);
                     cliente.cadastrarCliente(arquivoCliente);
@@ -117,7 +117,7 @@ public class Menu {
                 case 3:
                     Cliente.mostrarCliente(arquivoCliente);
                     System.out.println("Digite a posição do item que deseja deletar: ");
-                    int posicao = scan.nextInt() - 1;
+                    int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     FileManager.deletarItem(arquivoCliente, posicao);
                     break;
                 default:
@@ -135,20 +135,20 @@ public class Menu {
             System.out.println("[1] Cadastrar um funcionário");
             System.out.println("[2] Ver funcionários cadastrados");
             System.out.println("[3] Excluir um funcionário");
-            opcaoFuncionario = scan.nextInt();
+            opcaoFuncionario = Integer.parseInt(scan.nextLine());
             switch (opcaoFuncionario) {
                 case 0:
                     System.out.println("Saindo");
                     break;
                 case 1:
                     System.out.println("Digite o nome do funcionário: ");
-                    String nome = scan.next();
+                    String nome = scan.nextLine();
                     System.out.println("Digite o CPF do funcionário: ");
-                    String cpf = scan.next();
+                    String cpf = scan.nextLine();
                     System.out.println("Digite o salário do funcionário: ");
-                    Double salario = scan.nextDouble();
+                    Double salario = Double.parseDouble(scan.nextLine());
                     System.out.println("Digite a função do funcionário: ");
-                    String funcao = scan.next();
+                    String funcao = scan.nextLine();
 
                     Funcionario funcionario = new Funcionario(nome, cpf, salario, funcao);
                     funcionario.cadastrarFuncionario(arquivoFuncionario);
@@ -160,7 +160,7 @@ public class Menu {
                 case 3:
                     Funcionario.mostrarFuncionario(arquivoFuncionario);
                     System.out.println("Digite a posição do item que deseja deletar: ");
-                    int posicao = scan.nextInt() - 1;
+                    int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     FileManager.deletarItem(arquivoFuncionario, posicao);
                     break;
                 default:
@@ -178,14 +178,14 @@ public class Menu {
             System.out.println("[1] Cadastrar um ingrediente");
             System.out.println("[2] Ver ingredientes cadastrados");
             System.out.println("[3] Excluir um ingrediente");
-            opcaoIngredientes = scan.nextInt();
+            opcaoIngredientes = Integer.parseInt(scan.nextLine());
             switch (opcaoIngredientes) {
                 case 0:
                     System.out.println("Saindo");
                     break;
                 case 1:
                     System.out.println("Digite o nome do ingrediente: ");
-                    String nomeIngrediente = scan.next();
+                    String nomeIngrediente = scan.nextLine();
 
                     Ingredientes ingrediente = new Ingredientes(nomeIngrediente);
                     ingrediente.cadastrarIngredientes(arquivoIngredientes);
@@ -197,7 +197,7 @@ public class Menu {
                 case 3:
                     Ingredientes.mostrarIngredientes(arquivoIngredientes);
                     System.out.println("Digite a posição do ingrediente que deseja excluir: ");
-                    int posicao = scan.nextInt() - 1;
+                    int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     FileManager.deletarItem(arquivoIngredientes, posicao);
                     break;
                 default:
@@ -215,7 +215,7 @@ public class Menu {
             System.out.println("[1] Cadastrar um prato");
             System.out.println("[2] Ver pratos cadastrados");
             System.out.println("[3] Excluir um prato");
-            opcaoPratos = scan.nextInt();
+            opcaoPratos = Integer.parseInt(scan.nextLine());
             switch (opcaoPratos) {
                 case 0:
                     System.out.println("Saindo");
@@ -226,7 +226,7 @@ public class Menu {
 
                     // Recebendo nome
                     System.out.println("Digite o nome do prato: ");
-                    String nome = scan.next();
+                    String nome = scan.nextLine();
 
                     // Criação de array para armazenar os nomes dos ingredientes
                     ArrayList<String> nomesIngredientes = new ArrayList<>();
@@ -240,7 +240,7 @@ public class Menu {
                         // Escolha ingrediente para ser adicionado ao prato
                         System.out.println("Digite a posição do ingrediente que deseja adicionar ao prato: ");
                         System.out.println("0 - PARA SALVAR / SAIR");
-                        ingredientesEscolhido = scan.nextInt();
+                        ingredientesEscolhido = Integer.parseInt(scan.nextLine());
 
                         // Sai do do while se a escolha for 0
                         if (ingredientesEscolhido == 0) {
@@ -288,7 +288,8 @@ public class Menu {
 
                     // Solicitação de preço
                     System.out.println("Digite o preço do prato: ");
-                    Double preco = scan.nextDouble();
+                    
+                    Double preco = Double.parseDouble(scan.nextLine());
 
                     // Criação do Prato em si
                     Prato prato = new Prato(nome, preco, ingredientes);
@@ -302,7 +303,7 @@ public class Menu {
                 case 3:
                     Prato.mostrarPratos(arquivoPratos);
                     System.out.println("Digite a posição do prato que deseja excluir: ");
-                    int posicao = scan.nextInt() - 1;
+                    int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     FileManager.deletarItem(arquivoPratos, posicao);
                     break;
                 default:
@@ -321,7 +322,7 @@ public class Menu {
             System.out.println("[1] Cadastrar uma bebida");
             System.out.println("[2] Ver bebidas cadastradas");
             System.out.println("[3] Excluir uma bebida");
-            opcaoBebida = scan.nextInt();
+            opcaoBebida = Integer.parseInt(scan.nextLine());
             switch (opcaoBebida) {
                 case 0:
                     System.out.println("Saindo");
@@ -329,10 +330,10 @@ public class Menu {
                 case 1:
                     // Solicita o nome da bebida
                     System.out.println("Digite o nome da bebida: ");
-                    String nomeBebida = scan.next();
+                    String nomeBebida = scan.nextLine();
                     // Solicita o preço da bebida
                     System.out.println("Digite o preço da bebida: ");
-                    Double precoBebida = scan.nextDouble();
+                    Double precoBebida = Double.parseDouble(scan.nextLine());
 
                     // Cria o objeto bebeida
                     Bebida bebida = new Bebida(nomeBebida, precoBebida);
@@ -349,7 +350,7 @@ public class Menu {
                     Bebida.mostrarBebidas(arquivoBebidas);
                     // Solicita a posição para deleatr
                     System.out.println("Digite a posição da bebida que deseja excluir: ");
-                    int posicao = scan.nextInt() - 1;
+                    int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     // Deleta o item do arquivo de texto
                     FileManager.deletarItem(arquivoBebidas, posicao);
                     break;
@@ -370,7 +371,8 @@ public class Menu {
             System.out.println("[1] Cadastrar um pedido");
             System.out.println("[2] Ver pedidos cadastradas");
             System.out.println("[3] Excluir um pedido");
-            opcaoPedido = scan.nextInt();
+            System.out.println("[4] Ver pedidos ordenados por preço total");
+            opcaoPedido = Integer.parseInt(scan.nextLine());
             switch (opcaoPedido) {
                 case 0:
                     System.out.println("Saindo");
@@ -380,7 +382,7 @@ public class Menu {
                     // CLIENTE
                     Cliente.mostrarCliente(arquivoCliente);
                     System.out.println("Digite a posição do cliente para o pedido: ");
-                    int escolhaCliente = scan.nextInt();
+                    int escolhaCliente = Integer.parseInt(scan.nextLine());
 
                     if (escolhaCliente < 1 || escolhaCliente > FileManager.lerArquivo(arquivoCliente).size()) {
                         System.out.println("Número invalido");
@@ -394,7 +396,7 @@ public class Menu {
                     // FUNCIONARIO
                     Funcionario.mostrarFuncionario(arquivoFuncionario);
                     System.out.println("Digite a posição do funcionario para o pedido: ");
-                    int escolhaFuncionario = scan.nextInt();
+                    int escolhaFuncionario = Integer.parseInt(scan.nextLine());
 
                     if (escolhaFuncionario < 1
                             || escolhaFuncionario > FileManager.lerArquivo(arquivoFuncionario).size()) {
@@ -422,7 +424,7 @@ public class Menu {
                         System.out.println("Digite a posição do prato para o pedido: ");
                         System.out.println("0 - SALVAR / SAIR");
 
-                        escolhaPrato = scan.nextInt();
+                        escolhaPrato = Integer.parseInt(scan.nextLine());
 
                         if (escolhaPrato < 0
                                 || escolhaPrato > FileManager.lerArquivo(arquivoPratos).size()) {
@@ -436,7 +438,7 @@ public class Menu {
                         }
 
                         String pratoString = FileManager.lerArquivo(arquivoPratos).get(escolhaPrato - 1);
-                        String[] pratoDados = pratoString.replace(";;", ";").split(";");
+                        String[] pratoDados = pratoString.replace(";", ";").split(";");
 
                         String nomePrato = pratoDados[0];
                         Double precoPrato = Double.parseDouble(pratoDados[1]);
@@ -457,7 +459,7 @@ public class Menu {
                     do {
                         System.out.println("Digite a bebida para o pedido: ");
                         System.out.println("0 - SALVAR / SAIR");
-                        escolhaBebida = scan.nextInt();
+                        escolhaBebida = Integer.parseInt(scan.nextLine());
 
                         if (escolhaBebida < 0 || escolhaBebida > FileManager.lerArquivo(arquivoBebidas).size()) {
                             System.out.println("Número invalido");
@@ -487,11 +489,14 @@ public class Menu {
                     Pedido.mostrarPedidos(arquivoPedidos);
                     // Solicita a posição para deleatr
                     System.out.println("Digite a posição do pedido que deseja excluir: ");
-                    int posicao = scan.nextInt() - 1;
+                    int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     // Deleta o item do arquivo de texto
                     FileManager.deletarItem(arquivoPedidos, posicao);
                     break;
-
+                case 4:
+                    Pedido.mostrarPedidosOrdenadosPorPreco(arquivoPedidos);
+                    break;
+            
                 default:
                     System.out.println("Opção invalida!");
                     break;

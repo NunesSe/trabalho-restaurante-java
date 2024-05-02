@@ -1,1 +1,4 @@
 Paulo;Pedro;77.96000000000001/;Classico;Especial;Classico/;�gua;�gua;Suco
+Pedro Alberto;Maria Clara;47.379999999999995/ ;Especial;Classico/ ;Coca-cola;Coca-cola
+Joao;Pedro;13.0/ ;Especial/ 
+Carlos;Pedro;47.0/ ;Classico;Especial/ ;Coca-cola;Coca-cola

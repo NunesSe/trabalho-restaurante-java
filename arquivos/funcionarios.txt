@@ -1,1 +1,2 @@
 Pedro;999999999999;2500.0;Atendente
+Maria Clara;11111111111;1800.0;Faxineira
