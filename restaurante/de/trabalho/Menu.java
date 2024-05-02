@@ -215,6 +215,7 @@ public class Menu {
             System.out.println("[1] Cadastrar um prato");
             System.out.println("[2] Ver pratos cadastrados");
             System.out.println("[3] Excluir um prato");
+            System.out.println("[4] Pesquisar por ingredientes");
             opcaoPratos = Integer.parseInt(scan.nextLine());
             switch (opcaoPratos) {
                 case 0:
@@ -305,6 +306,11 @@ public class Menu {
                     System.out.println("Digite a posição do prato que deseja excluir: ");
                     int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     FileManager.deletarItem(arquivoPratos, posicao);
+                    break;
+                case 4:
+                    Ingredientes.mostrarIngredientes(arquivoIngredientes);
+                    int posicaoIngrediente = Integer.parseInt(scan.nextLine());
+                    Prato.buscarPorIngrediente(arquivoIngredientes, arquivoPratos, posicaoIngrediente);
                     break;
                 default:
                     System.out.println("Opção inválida!");

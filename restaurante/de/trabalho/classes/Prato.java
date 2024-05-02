@@ -75,4 +75,17 @@ public class Prato {
     public static void deletarPratos(File arquivo, int posicao) throws IOException{
         FileManager.deletarItem(arquivo, posicao);
     }
+
+    public static void buscarPorIngrediente(File arquivoIngredientes, File arquivoPedidos, int posicaoIngrediente) throws IOException {
+        ArrayList<String> linhasIngredientes = FileManager.lerArquivo(arquivoIngredientes);
+
+
+        if (posicaoIngrediente < 0 || posicaoIngrediente >= linhasIngredientes.size()) {
+            System.out.println("Posição inválida.");
+            return;
+        }
+
+        String nomeIngrediente = linhasIngredientes.get(posicaoIngrediente).replace(";", "");
+        System.out.println(nomeIngrediente);
+    }
 }
