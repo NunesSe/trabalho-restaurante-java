@@ -14,6 +14,7 @@ public class Pedido {
         this.funcionario = funcionario;
         this.pratos = pratos;
         this.bebidas = bebidas;
+        calcularPrecoFinal();
     }
 
     public Cliente getCliente() {
@@ -38,6 +39,10 @@ public class Pedido {
 
     public void setPratos(ArrayList<Prato> pratos) {
         this.pratos = pratos;
+    }
+
+    public Double getPrecoFinal() {
+        return precoFinal;
     }
 
     public ArrayList<Bebida> getBebidas() {
@@ -71,4 +76,6 @@ public class Pedido {
         this.precoFinal = precoPratos + precoBebidas;
     }
 
+
+    
 }

@@ -8,6 +8,7 @@ import classes.Cliente;
 import classes.FileManager;
 import classes.Funcionario;
 import classes.Ingredientes;
+import classes.Pedido;
 import classes.Prato;
 
 public class Menu {
@@ -384,7 +385,7 @@ public class Menu {
 
                     // Cria o cliente com o nome escolhido
                     Cliente cliente = new Cliente(
-                    FileManager.lerArquivo(arquivoCliente).get(escolhaCliente - 1).replace(";", ""));
+                            FileManager.lerArquivo(arquivoCliente).get(escolhaCliente - 1).replace(";", ""));
 
                     // FUNCIONARIO
                     Funcionario.mostrarFuncionario(arquivoFuncionario);
@@ -404,16 +405,75 @@ public class Menu {
                     String nome = funcionarioDados[0];
                     String cpf = funcionarioDados[1];
                     // Convertendo a String para double
-                    Double salario = Double.parseDouble(funcionarioDados[2]); 
+                    Double salario = Double.parseDouble(funcionarioDados[2]);
                     String funcao = funcionarioDados[3];
-                    
 
                     Funcionario funcionario = new Funcionario(nome, cpf, salario, funcao);
 
                     // PRATOS
-                    
-                    // BEBIDAS
+                    Prato.mostrarPratos(arquivoPratos);
+                    int escolhaPrato;
+                    ArrayList<Prato> pratos = new ArrayList<>();
+                    do {
+                        System.out.println("Digite a posição do prato para o pedido: ");
+                        System.out.println("0 - SALVAR / SAIR");
 
+                        escolhaPrato = scan.nextInt();
+
+                        if (escolhaPrato < 0
+                                || escolhaPrato > FileManager.lerArquivo(arquivoPratos).size()) {
+                            System.out.println("Número invalido");
+                            break;
+                        }
+
+                        if (escolhaPrato == 0) {
+                            System.out.println("Saindo");
+                            break;
+                        }
+
+                        String pratoString = FileManager.lerArquivo(arquivoPratos).get(escolhaPrato - 1);
+                        String[] pratoDados = pratoString.replace(";;", ";").split(";");
+
+                        String nomePrato = pratoDados[0];
+                        Double precoPrato = Double.parseDouble(pratoDados[1]);
+                        ArrayList<Ingredientes> ingredientesPrato = new ArrayList<>();
+                        for (int i = 2; i < pratoDados.length; i++) {
+                            ingredientesPrato.add(new Ingredientes(pratoDados[i]));
+                        }
+
+                        Prato pratoTemporario = new Prato(nomePrato, precoPrato, ingredientesPrato);
+                        pratos.add(pratoTemporario);
+                        System.out.println("Prato adicionado!");
+                    } while (escolhaPrato != 0);
+
+                    // BEBIDAS
+                    Bebida.mostrarBebidas(arquivoBebidas);
+                    int escolhaBebida;
+                    ArrayList<Bebida> bebidas = new ArrayList<>();
+                    do {
+                        System.out.println("Digite a bebida para o pedido: ");
+                        System.out.println("0 - SALVAR / SAIR");
+                        escolhaBebida = scan.nextInt();
+
+                        if (escolhaBebida < 0 || escolhaBebida > FileManager.lerArquivo(arquivoBebidas).size()) {
+                            System.out.println("Número invalido");
+                            break;
+                        }
+
+                        if (escolhaBebida == 0) {
+                            System.out.println("Saindo");
+                            break;
+                        }
+
+                        String bebidaString = FileManager.lerArquivo(arquivoBebidas).get(escolhaBebida - 1);
+                        String[] bebidaDados = bebidaString.split(";");
+                        Bebida bebidaTemporaria = new Bebida(bebidaDados[0], Double.parseDouble(bebidaDados[1]));
+                        bebidas.add(bebidaTemporaria);
+                        System.out.println("Bebida adicionada");
+                    } while (escolhaBebida != 0);
+                    Pedido pedido = new Pedido(cliente, funcionario, pratos, bebidas);
+                    pedido.calcularPrecoFinal();
+                    System.out.println(pedido.getPrecoFinal());
                     break;
 
                 default:
