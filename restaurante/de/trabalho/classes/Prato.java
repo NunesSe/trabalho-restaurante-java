@@ -53,4 +53,25 @@ public class Prato {
         FileManager.escreverArquivo(arquivo, texto, true);
     }
 
+    public static void mostrarPratos(File arquivo) throws IOException{           
+        ArrayList<String> resultado = FileManager.lerArquivo(arquivo);
+        int posicao = 1;
+        for(String string : resultado) {
+            String[] partes = string.split(";");
+            System.out.println("================================");
+            System.out.println("Posicao: "+posicao);
+            System.out.println("Nome: "+partes[0]);
+            System.out.println("Preço: " + partes[1]);
+            for (int i = 2; i < partes.length; i++) {
+                System.out.println("Ingredientes: " + partes[i]);
+            }
+            System.out.println("================================");
+            posicao++;
+
+        }
+    }
+
+    public static void deletarPratos(File arquivo, int posicao) throws IOException{
+        FileManager.deletarItem(arquivo, posicao);
+    }
 }

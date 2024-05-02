@@ -1,3 +1,0 @@
-Carne;
-Arroz;
-Batata;

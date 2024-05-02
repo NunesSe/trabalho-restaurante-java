@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import classes.Bebida;
 import classes.Cliente;
 import classes.FileManager;
 import classes.Funcionario;
@@ -24,6 +25,7 @@ public class Menu {
         System.out.println("[2] Funcionario");
         System.out.println("[3] Ingredientes");
         System.out.println("[4] Pratos");
+        System.out.println("[5] Bebidas");
         System.out.println("Digite o que deseja fazer: ");
     }
 
@@ -43,8 +45,16 @@ public class Menu {
         File arquivoPratos = new File("./arquivos/pratos.txt");
         FileManager.criarArquivo(arquivoPratos);
 
+        File arquivoBebidas = new File("./arquivos/pratos.txt");
+        FileManager.criarArquivo(arquivoBebidas);
+
         int opcao = -1;
         while (opcao != 0) {
+            // Linhas para limpar o terminal
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+
+            
             mostrarMenu();
             opcao = scan.nextInt();
             switch (opcao) {
@@ -62,6 +72,9 @@ public class Menu {
                     break;
                 case 4:
                     menuPratos(scan, arquivoPratos, arquivoIngredientes);
+                    break;
+                case 5:
+                    menuBebida(scan, arquivoBebidas);
                 default:
                     System.out.println("Opção inválida!");
                     break;
@@ -275,7 +288,15 @@ public class Menu {
                     prato.cadastrarPratos(arquivoPratos);
                     System.out.println("Prato registrado com sucesso!");
                     break;
-
+                case 2:
+                    Prato.mostrarPratos(arquivoPratos);
+                    break;
+                case 3:
+                    Prato.mostrarPratos(arquivoPratos);
+                    System.out.println("Digite a posição do prato que deseja excluir: ");
+                    int posicao = scan.nextInt() - 1;
+                    FileManager.deletarItem(arquivoPratos, posicao);
+                    break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
@@ -283,4 +304,44 @@ public class Menu {
         } while (opcaoPratos != 0);
 
     }
+
+    public static void menuBebida(Scanner scan, File arquivoBebidas) throws IOException {
+    int opcaoBebida;
+    do {
+        System.out.println("======= MENU BEBIDAS =======");
+        System.out.println("[0] Sair");
+        System.out.println("[1] Cadastrar uma bebida");
+        System.out.println("[2] Ver bebidas cadastradas");
+        System.out.println("[3] Excluir uma bebida");
+        opcaoBebida = scan.nextInt();
+        switch (opcaoBebida) {
+            case 0:
+                System.out.println("Saindo");
+                break;
+            case 1:
+                System.out.println("Digite o nome da bebida: ");
+                String nomeBebida = scan.next();
+                System.out.println("Digite o preço da bebida: ");
+                Double precoBebida = scan.nextDouble();
+
+                Bebida bebida = new Bebida(nomeBebida, precoBebida);
+                bebida.cadastrarBebida(arquivoBebidas);
+                System.out.println("Bebida cadastrada com sucesso!");
+                break;
+            case 2:
+                Bebida.mostrarBebidas(arquivoBebidas);
+                break;
+            case 3:
+                Bebida.mostrarBebidas(arquivoBebidas);
+                System.out.println("Digite a posição da bebida que deseja excluir: ");
+                int posicao = scan.nextInt() - 1;
+                FileManager.deletarItem(arquivoBebidas, posicao);
+                break;
+            default:
+                System.out.println("Opção inválida!");
+                break;
+        }
+    } while (opcaoBebida != 0);
+}
+
 }

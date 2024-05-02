@@ -46,7 +46,7 @@ public class FileManager {
         String linha = "";
         ArrayList<String> resultado = new ArrayList<String>();
         while((linha = bufferedReader.readLine()) != null) {
-            linha = linha.replace(";", "");
+            
             resultado.add(linha);
         }
 
@@ -58,10 +58,13 @@ public class FileManager {
     public static void deletarItem(File arquivo, int posicao) throws IOException {
         ArrayList<String> linhas = lerArquivo(arquivo);
 
+
         if (posicao < 0 || posicao >= linhas.size()) {
             System.out.println("Posição inválida.");
             return;
         }
+
+        
         linhas.remove(posicao);
         deletarArquivo(arquivo);
 

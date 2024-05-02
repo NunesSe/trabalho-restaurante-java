@@ -1,1 +1,3 @@
-asd;12.0;Carne
+Coca-cola;4.5
+µgua;3.2
+Suco;6.4
