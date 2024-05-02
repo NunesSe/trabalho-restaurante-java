@@ -54,21 +54,21 @@ public class Pedido {
         double precoBebidas = 0.0;
 
         // Calcula o preço total dos pratos
-        for (Prato prato : pratos) {
-            precoPratos += prato.getPreco();
+        if(pratos.size() > 0) {
+            for (Prato prato : pratos) {
+                precoPratos += prato.getPreco();
+            }
         }
 
         // Calcula o preço total das bebidas
-        for (Bebida bebida : bebidas) {
-            precoBebidas += bebida.getPreco();
+        if(bebidas.size() > 0) {
+            for (Bebida bebida : bebidas) {
+                precoBebidas += bebida.getPreco();
+            }
         }
 
         // Soma os preços dos pratos e das bebidas para obter o preço final
         this.precoFinal = precoPratos + precoBebidas;
     }
 
-    
-
-    
-    
 }

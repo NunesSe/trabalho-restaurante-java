@@ -65,8 +65,8 @@ public class Funcionario {
             System.out.println("Posição: " + posicao);
             System.out.println("Nome: " + partes[0]);
             System.out.println("CPF: " + partes[1]);
-            System.out.println("SALARIO: " + partes[2]);
-            System.out.println("FUNÇÃO: " + partes[3]);
+            System.out.println("Salario: " + partes[2]);
+            System.out.println("Função: " + partes[3]);
             System.out.println("=========================================");
             posicao++;
         }

@@ -62,10 +62,11 @@ public class Prato {
             System.out.println("Posicao: "+posicao);
             System.out.println("Nome: "+partes[0]);
             System.out.println("Preço: " + partes[1]);
+            System.out.println("Ingredientes: "); 
             for (int i = 2; i < partes.length; i++) {
-                System.out.println("Ingredientes: " + partes[i]);
+                System.out.print(partes[i] + " ");
             }
-            System.out.println("================================");
+            System.out.println("\n================================");
             posicao++;
 
         }

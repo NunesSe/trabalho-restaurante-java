@@ -1,3 +1,1 @@
-Coca-cola;4.5
-µgua;3.2
-Suco;6.4
+Classico;23.99;Carne;;Arroz;;Feij∆o;;Batata;

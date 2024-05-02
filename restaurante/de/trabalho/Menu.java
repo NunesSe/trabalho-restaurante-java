@@ -21,11 +21,12 @@ public class Menu {
     public static void mostrarMenu() {
         System.out.println("======= MENU PRINCIPAL =======");
         System.out.println("[0] Sair");
-        System.out.println("[1] Cliente");
-        System.out.println("[2] Funcionario");
+        System.out.println("[1] Clientes");
+        System.out.println("[2] Funcionarios");
         System.out.println("[3] Ingredientes");
         System.out.println("[4] Pratos");
         System.out.println("[5] Bebidas");
+        System.out.println("[6] Pedidos (principal)");
         System.out.println("Digite o que deseja fazer: ");
     }
 
@@ -45,7 +46,7 @@ public class Menu {
         File arquivoPratos = new File("./arquivos/pratos.txt");
         FileManager.criarArquivo(arquivoPratos);
 
-        File arquivoBebidas = new File("./arquivos/pratos.txt");
+        File arquivoBebidas = new File("./arquivos/bebidas.txt");
         FileManager.criarArquivo(arquivoBebidas);
 
         int opcao = -1;
@@ -54,7 +55,6 @@ public class Menu {
             System.out.print("\033[H\033[2J");
             System.out.flush();
 
-            
             mostrarMenu();
             opcao = scan.nextInt();
             switch (opcao) {
@@ -68,13 +68,17 @@ public class Menu {
                     menuFuncionario(scan, arquivoFuncionario);
                     break;
                 case 3:
-                    menuIngredientes(scan, arquivoIngredientes);
+                    menuIngrediente(scan, arquivoIngredientes);
                     break;
                 case 4:
-                    menuPratos(scan, arquivoPratos, arquivoIngredientes);
+                    menuPrato(scan, arquivoPratos, arquivoIngredientes);
                     break;
                 case 5:
                     menuBebida(scan, arquivoBebidas);
+                    break;
+                case 6:
+                    menuPedido(scan, arquivoFuncionario, arquivoCliente, arquivoPratos, arquivoBebidas);
+                    break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
@@ -162,7 +166,7 @@ public class Menu {
         } while (opcaoFuncionario != 0);
     }
 
-    public static void menuIngredientes(Scanner scan, File arquivoIngredientes) throws IOException {
+    public static void menuIngrediente(Scanner scan, File arquivoIngredientes) throws IOException {
         int opcaoIngredientes;
         do {
             System.out.println("======= MENU INGREDIENTES =======");
@@ -199,7 +203,7 @@ public class Menu {
         } while (opcaoIngredientes != 0);
     }
 
-    public static void menuPratos(Scanner scan, File arquivoPratos, File arquivoIngredientes) throws IOException {
+    public static void menuPrato(Scanner scan, File arquivoPratos, File arquivoIngredientes) throws IOException {
         int opcaoPratos;
         do {
             System.out.println("======= MENU PRATOS =======");
@@ -224,11 +228,10 @@ public class Menu {
                     ArrayList<String> nomesIngredientes = new ArrayList<>();
 
                     // Mostrando lista de ingredientes
-                     Ingredientes.mostrarIngredientes(arquivoIngredientes);
+                    Ingredientes.mostrarIngredientes(arquivoIngredientes);
 
                     // Criação de do-while para poder adicionar varios ingredientes em um prato
                     do {
-                        
 
                         // Escolha ingrediente para ser adicionado ao prato
                         System.out.println("Digite a posição do ingrediente que deseja adicionar ao prato: ");
@@ -236,31 +239,32 @@ public class Menu {
                         ingredientesEscolhido = scan.nextInt();
 
                         // Sai do do while se a escolha for 0
-                        if(ingredientesEscolhido == 0) {
+                        if (ingredientesEscolhido == 0) {
                             break;
                         }
 
                         // Verifica se a escolha é uma posição valida
-                        if (ingredientesEscolhido > 0 && ingredientesEscolhido <= FileManager.lerArquivo(arquivoIngredientes).size()) {
+                        if (ingredientesEscolhido > 0
+                                && ingredientesEscolhido <= FileManager.lerArquivo(arquivoIngredientes).size()) {
                             // Inicialização da variavel
-                            String nomeIngrediente = FileManager.lerArquivo(arquivoIngredientes).get(ingredientesEscolhido - 1);
+                            String nomeIngrediente = FileManager.lerArquivo(arquivoIngredientes)
+                                    .get(ingredientesEscolhido - 1);
 
                             // Se não ainda não foi adicionado, adiciona o ingrediente
-                            if(!nomesIngredientes.contains(nomeIngrediente)) {
-                                System.out.println("Ingrediente adicionado: " + nomeIngrediente );
+                            if (!nomesIngredientes.contains(nomeIngrediente)) {
+                                System.out.println("Ingrediente adicionado: " + nomeIngrediente);
                                 nomesIngredientes.add(nomeIngrediente);
-                            } 
+                            }
                             // Mensagem de erro caso ingrediente ja esteja na lista
                             else {
                                 System.out.println("Esse ingrediente ja foi selecionado!");
                             }
-                        } 
+                        }
                         // Mensagem de erro para posição invalida
                         else {
                             System.out.println("Digite uma posição valida!");
                         }
 
-                       
                     } while (ingredientesEscolhido != 0);
 
                     // Volta ao menu se nenhum ingrediente foi selecionado
@@ -306,42 +310,116 @@ public class Menu {
     }
 
     public static void menuBebida(Scanner scan, File arquivoBebidas) throws IOException {
-    int opcaoBebida;
-    do {
-        System.out.println("======= MENU BEBIDAS =======");
-        System.out.println("[0] Sair");
-        System.out.println("[1] Cadastrar uma bebida");
-        System.out.println("[2] Ver bebidas cadastradas");
-        System.out.println("[3] Excluir uma bebida");
-        opcaoBebida = scan.nextInt();
-        switch (opcaoBebida) {
-            case 0:
-                System.out.println("Saindo");
-                break;
-            case 1:
-                System.out.println("Digite o nome da bebida: ");
-                String nomeBebida = scan.next();
-                System.out.println("Digite o preço da bebida: ");
-                Double precoBebida = scan.nextDouble();
+        int opcaoBebida;
+        do {
+            System.out.println("======= MENU BEBIDAS =======");
+            System.out.println("[0] Sair");
+            System.out.println("[1] Cadastrar uma bebida");
+            System.out.println("[2] Ver bebidas cadastradas");
+            System.out.println("[3] Excluir uma bebida");
+            opcaoBebida = scan.nextInt();
+            switch (opcaoBebida) {
+                case 0:
+                    System.out.println("Saindo");
+                    break;
+                case 1:
+                    // Solicita o nome da bebida
+                    System.out.println("Digite o nome da bebida: ");
+                    String nomeBebida = scan.next();
+                    // Solicita o preço da bebida
+                    System.out.println("Digite o preço da bebida: ");
+                    Double precoBebida = scan.nextDouble();
 
-                Bebida bebida = new Bebida(nomeBebida, precoBebida);
-                bebida.cadastrarBebida(arquivoBebidas);
-                System.out.println("Bebida cadastrada com sucesso!");
-                break;
-            case 2:
-                Bebida.mostrarBebidas(arquivoBebidas);
-                break;
-            case 3:
-                Bebida.mostrarBebidas(arquivoBebidas);
-                System.out.println("Digite a posição da bebida que deseja excluir: ");
-                int posicao = scan.nextInt() - 1;
-                FileManager.deletarItem(arquivoBebidas, posicao);
-                break;
-            default:
-                System.out.println("Opção inválida!");
-                break;
-        }
-    } while (opcaoBebida != 0);
-}
+                    // Cria o objeto bebeida
+                    Bebida bebida = new Bebida(nomeBebida, precoBebida);
+                    // Cadastra a bebida no arquivo de texto
+                    bebida.cadastrarBebida(arquivoBebidas);
+                    System.out.println("Bebida cadastrada com sucesso!");
+                    break;
+                case 2:
+                    // Chama o metodo de mostrar as bebidas
+                    Bebida.mostrarBebidas(arquivoBebidas);
+                    break;
+                case 3:
+                    // Mostra as bebidas cadastradas
+                    Bebida.mostrarBebidas(arquivoBebidas);
+                    // Solicita a posição para deleatr
+                    System.out.println("Digite a posição da bebida que deseja excluir: ");
+                    int posicao = scan.nextInt() - 1;
+                    // Deleta o item do arquivo de texto
+                    FileManager.deletarItem(arquivoBebidas, posicao);
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (opcaoBebida != 0);
+    }
 
+    public static void menuPedido(Scanner scan, File arquivoFuncionario, File arquivoCliente, File arquivoPratos,
+            File arquivoBebidas) throws IOException {
+        int opcaoPedido;
+        do {
+            System.out.println("======= MENU PEDIDOS =======");
+            System.out.println("[0] Sair");
+            System.out.println("[1] Cadastrar um pedido");
+            System.out.println("[2] Ver pedidos cadastradas");
+            System.out.println("[3] Excluir um pedido");
+            opcaoPedido = scan.nextInt();
+            switch (opcaoPedido) {
+                case 0:
+                    System.out.println("Saindo");
+                    break;
+                case 1:
+
+                    // CLIENTE
+                    Cliente.mostrarCliente(arquivoCliente);
+                    System.out.println("Digite a posição do cliente para o pedido: ");
+                    int escolhaCliente = scan.nextInt();
+
+                    if (escolhaCliente < 1 || escolhaCliente > FileManager.lerArquivo(arquivoCliente).size()) {
+                        System.out.println("Número invalido");
+                        break;
+                    }
+
+                    // Cria o cliente com o nome escolhido
+                    Cliente cliente = new Cliente(
+                    FileManager.lerArquivo(arquivoCliente).get(escolhaCliente - 1).replace(";", ""));
+
+                    // FUNCIONARIO
+                    Funcionario.mostrarFuncionario(arquivoFuncionario);
+                    System.out.println("Digite a posição do funcionario para o pedido: ");
+                    int escolhaFuncionario = scan.nextInt();
+
+                    if (escolhaFuncionario < 1
+                            || escolhaFuncionario > FileManager.lerArquivo(arquivoFuncionario).size()) {
+                        System.out.println("Número invalido");
+                        break;
+                    }
+
+                    String funcionarioString = FileManager.lerArquivo(arquivoFuncionario).get(escolhaFuncionario - 1);
+
+                    String[] funcionarioDados = funcionarioString.split(";");
+
+                    String nome = funcionarioDados[0];
+                    String cpf = funcionarioDados[1];
+                    // Convertendo a String para double
+                    Double salario = Double.parseDouble(funcionarioDados[2]); 
+                    String funcao = funcionarioDados[3];
+                    
+
+                    Funcionario funcionario = new Funcionario(nome, cpf, salario, funcao);
+
+                    // PRATOS
+                    
+                    // BEBIDAS
+
+                    break;
+
+                default:
+                    System.out.println("Opção invalida!");
+                    break;
+            }
+        } while (opcaoPedido != 0);
+    }
 }
