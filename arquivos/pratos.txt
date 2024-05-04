@@ -1,3 +1,2 @@
-Classico;23.99;Carne;;Arroz;;Feij∆o;;Batata;
-Especial;12.99;Arroz;;Feij∆o;
-Simples prato;50.0;Carne;;Arroz;;Batata;;Feij∆o;
+Simples;12.0/;Carne;;Arroz;;Batata;
+Especial;25.0/;Batata;;Arroz;

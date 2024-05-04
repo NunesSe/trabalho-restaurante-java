@@ -309,7 +309,7 @@ public class Menu {
                     break;
                 case 4:
                     Ingredientes.mostrarIngredientes(arquivoIngredientes);
-                    int posicaoIngrediente = Integer.parseInt(scan.nextLine());
+                    int posicaoIngrediente = Integer.parseInt(scan.nextLine()) -1;
                     Prato.buscarPorIngrediente(arquivoIngredientes, arquivoPratos, posicaoIngrediente);
                     break;
                 default:

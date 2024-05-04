@@ -39,32 +39,35 @@ public class Prato {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
- 
+
     public void cadastrarPratos(File arquivo) throws IOException {
-        if(!arquivo.exists()){
+        if (!arquivo.exists()) {
             FileManager.criarArquivo(arquivo);
         }
-        
-        String texto = this.nome + ";" + this.preco;
+
+        String texto = this.nome + ";" + this.preco + "/";
         for (Ingredientes ingrediente : ingredientes) {
             texto = texto + ";" + ingrediente.getNome();
         }
-        
+
         FileManager.escreverArquivo(arquivo, texto, true);
     }
 
-    public static void mostrarPratos(File arquivo) throws IOException{           
+    public static void mostrarPratos(File arquivo) throws IOException {
         ArrayList<String> resultado = FileManager.lerArquivo(arquivo);
         int posicao = 1;
-        for(String string : resultado) {
-            String[] partes = string.split(";");
+        for (String string : resultado) {
+            String[] partes = string.split("/");
+            String[] primeiraParte = partes[0].split(";");
+            String[] segundaParte = partes[1].split(";");
+
             System.out.println("================================");
-            System.out.println("Posicao: "+posicao);
-            System.out.println("Nome: "+partes[0]);
-            System.out.println("Preço: " + partes[1]);
-            System.out.println("Ingredientes: "); 
-            for (int i = 2; i < partes.length; i++) {
-                System.out.print(partes[i] + " ");
+            System.out.println("Posicao: " + posicao);
+            System.out.println("Nome: " + primeiraParte[0]);
+            System.out.println("Preço: " + primeiraParte[1]);
+            System.out.println("Ingredientes: ");
+            for (String ingrediente : segundaParte) {
+                System.out.print(ingrediente + " ");
             }
             System.out.println("\n================================");
             posicao++;
@@ -72,20 +75,58 @@ public class Prato {
         }
     }
 
-    public static void deletarPratos(File arquivo, int posicao) throws IOException{
+    public static void deletarPratos(File arquivo, int posicao) throws IOException {
         FileManager.deletarItem(arquivo, posicao);
     }
 
-    public static void buscarPorIngrediente(File arquivoIngredientes, File arquivoPedidos, int posicaoIngrediente) throws IOException {
+    public static void buscarPorIngrediente(File arquivoIngredientes, File arquivoPratos, int posicaoIngrediente) throws IOException {
         ArrayList<String> linhasIngredientes = FileManager.lerArquivo(arquivoIngredientes);
 
-
         if (posicaoIngrediente < 0 || posicaoIngrediente >= linhasIngredientes.size()) {
-            System.out.println("Posição inválida.");
+            System.out.println("Posição de ingrediente inválida.");
             return;
         }
 
         String nomeIngrediente = linhasIngredientes.get(posicaoIngrediente).replace(";", "");
-        System.out.println(nomeIngrediente);
+
+        ArrayList<String> linhasPratos = FileManager.lerArquivo(arquivoPratos);
+
+        System.out.println("Pratos que contêm o ingrediente '" + nomeIngrediente + "':");
+
+        boolean pratoEncontrado = false;
+
+        for (String linhaPrato : linhasPratos) {
+            String[] partes = linhaPrato.split("/");
+            String[] primeiraParte = partes[0].split(";");
+            String[] ingredientesString = partes[1].split(";;");
+
+            ArrayList<Ingredientes> ingredientesLista = new ArrayList<>();
+
+            for (String ingrediente : ingredientesString) {
+                ingrediente = ingrediente.replace(";", "");
+                ingredientesLista.add(new Ingredientes(ingrediente));
+            }
+
+            for (Ingredientes ingrediente : ingredientesLista) {
+                if (nomeIngrediente.equals(ingrediente.getNome())) {
+                    if (!pratoEncontrado) {
+                        pratoEncontrado = true;
+                        System.out.println("================================");
+                    }
+                    System.out.println("Nome: " + primeiraParte[0]);
+                    System.out.println("Preço: " + primeiraParte[1]);
+                    System.out.println("Ingredientes:");
+                    for (Ingredientes ingredientePrato : ingredientesLista) {
+                        System.out.print(ingredientePrato.getNome() + " ");
+                    }
+                    System.out.println("\n================================");
+                    break; 
+                }
+            }
+        }
+
+        if (!pratoEncontrado) {
+            System.out.println("Nenhum prato encontrado com o ingrediente " + nomeIngrediente + ".");
+        }
     }
 }
