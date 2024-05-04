@@ -2,7 +2,6 @@ package classes;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.DrbgParameters.Reseed;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -13,6 +12,7 @@ public class Pedido {
     private ArrayList<Bebida> bebidas;
     private Double precoFinal;
 
+    // Classe pedido que contém os dados do cliente, funcionário, pratos, bebidas e preço final, com métodos setters e getters.
     public Pedido(Cliente cliente, Funcionario funcionario, ArrayList<Prato> pratos, ArrayList<Bebida> bebidas) {
         this.cliente = cliente;
         this.funcionario = funcionario;
@@ -132,10 +132,11 @@ public class Pedido {
         }
     }
 
+    // Metodo para deletar pedidos da posicao informada.
     public static void deletarPedidos(File arquivo, int posicao) throws IOException {
         FileManager.deletarItem(arquivo, posicao);
     }
-
+    // Metodo que mostra os pedidos de forma ordenada por preço
     public static void mostrarPedidosOrdenadosPorPreco(File arquivo) throws IOException {
         // Leitura de arquivo
         ArrayList<String> resultado = FileManager.lerArquivo(arquivo);

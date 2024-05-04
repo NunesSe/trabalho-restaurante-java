@@ -47,7 +47,8 @@ public class Funcionario {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
-
+    
+    // Metodo que realiza o cadastro 
      public void cadastrarFuncionario(File arquivo) throws IOException {
         if(!arquivo.exists()) {
             FileManager.criarArquivo(arquivo);
@@ -55,7 +56,7 @@ public class Funcionario {
         FileManager.escreverArquivo(arquivo, this.nome + ";" + this.cpf + ";" + this.salario + ";" + 
         this.funcao, true);
     }
-
+        // Metodo que mostra os funcionarios cadastrados
         public static void mostrarFuncionario(File arquivo) throws IOException {
         ArrayList<String> resultado = FileManager.lerArquivo(arquivo);
         int posicao = 1;
@@ -71,6 +72,7 @@ public class Funcionario {
             posicao++;
         }
     }
+        // Metodo que deleta funcionario ja cadastrado
         public static void deletarFuncionario(File arquivo, int posicao) throws IOException {
             FileManager.deletarItem(arquivo, posicao);
         }

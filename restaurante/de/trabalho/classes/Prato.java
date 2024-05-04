@@ -52,7 +52,7 @@ public class Prato {
 
         FileManager.escreverArquivo(arquivo, texto, true);
     }
-
+    // Método para mostrar os detalhes dos pratos armazenados em um arquivo, incluindo nome, preço e ingredientes.
     public static void mostrarPratos(File arquivo) throws IOException {
         ArrayList<String> resultado = FileManager.lerArquivo(arquivo);
         int posicao = 1;
@@ -74,11 +74,12 @@ public class Prato {
 
         }
     }
-
+    // Metodo para deletar qualquer prato indicando a posicao que se encontra
     public static void deletarPratos(File arquivo, int posicao) throws IOException {
         FileManager.deletarItem(arquivo, posicao);
     }
-
+    
+    // Método para buscar e exibir os pratos que contêm um ingrediente específico, lendo informações de arquivos de ingredientes e pratos.
     public static void buscarPorIngrediente(File arquivoIngredientes, File arquivoPratos, int posicaoIngrediente) throws IOException {
         ArrayList<String> linhasIngredientes = FileManager.lerArquivo(arquivoIngredientes);
 

@@ -18,7 +18,7 @@ public class Menu {
 
         escolhaMenu();
     }
-
+    //Metodo que mostra o menu para navegar pelo codigo
     public static void mostrarMenu() {
         System.out.println("======= MENU PRINCIPAL =======");
         System.out.println("[0] Sair");
@@ -54,13 +54,15 @@ public class Menu {
         FileManager.criarArquivo(arquivoPedidos);
 
         int opcao = -1;
+        //  Loop para exibir o menu e processar a escolha do usuário
         while (opcao != 0) {
             // Linhas para limpar o terminal
             System.out.print("\033[H\033[2J");
             System.out.flush();
-
+            // Exibe o menu de opções
             mostrarMenu();
-            opcao = Integer.parseInt(scan.nextLine());
+            opcao = Integer.parseInt(scan.nextLine()); // Lê a opção escolhida pelo usuário
+            // Realiza a ação correspondente à opção escolhida
             switch (opcao) {
                 case 0:
                     System.out.println("Saindo");
@@ -104,7 +106,8 @@ public class Menu {
                     System.out.println("Saindo");
                     break;
                 case 1:
-                    System.out.println("Digite seu nome: ");
+                 // Opção para cadastrar um novo cliente    
+                System.out.println("Digite seu nome: ");  
                     String nome = scan.nextLine();
 
                     Cliente cliente = new Cliente(nome);
@@ -112,9 +115,10 @@ public class Menu {
                     System.out.println("Cliente cadastrado!");
                     break;
                 case 2:
-                    Cliente.mostrarCliente(arquivoCliente);
+                    Cliente.mostrarCliente(arquivoCliente); // Opção para mostrar os clientes cadastrados
                     break;
                 case 3:
+                    // Opção para excluir um cliente
                     Cliente.mostrarCliente(arquivoCliente);
                     System.out.println("Digite a posição do item que deseja deletar: ");
                     int posicao = Integer.parseInt(scan.nextLine()) - 1;
@@ -124,7 +128,7 @@ public class Menu {
                     System.out.println("Opção inválida!");
                     break;
             }
-        } while (opcaoCliente != 0);
+        } while (opcaoCliente != 0); // Continua o loop até o usuário escolher sair
     }
 
     public static void menuFuncionario(Scanner scan, File arquivoFuncionario) throws IOException {
@@ -141,6 +145,7 @@ public class Menu {
                     System.out.println("Saindo");
                     break;
                 case 1:
+                    // Opção para cadastrar um novo funcionário
                     System.out.println("Digite o nome do funcionário: ");
                     String nome = scan.nextLine();
                     System.out.println("Digite o CPF do funcionário: ");
@@ -155,9 +160,11 @@ public class Menu {
                     System.out.println("Funcionário cadastrado com sucesso!");
                     break;
                 case 2:
+                    // Opção para mostrar os funcionários cadastrados
                     Funcionario.mostrarFuncionario(arquivoFuncionario);
                     break;
                 case 3:
+                    // Opção para excluir um funcionário
                     Funcionario.mostrarFuncionario(arquivoFuncionario);
                     System.out.println("Digite a posição do item que deseja deletar: ");
                     int posicao = Integer.parseInt(scan.nextLine()) - 1;
@@ -167,7 +174,7 @@ public class Menu {
                     System.out.println("Opção inválida!");
                     break;
             }
-        } while (opcaoFuncionario != 0);
+        } while (opcaoFuncionario != 0);  // Continua o loop até o usuário escolher sair
     }
 
     public static void menuIngrediente(Scanner scan, File arquivoIngredientes) throws IOException {
@@ -206,7 +213,7 @@ public class Menu {
             }
         } while (opcaoIngredientes != 0);
     }
-
+    // Mostra o menu dos pratos disponiveis
     public static void menuPrato(Scanner scan, File arquivoPratos, File arquivoIngredientes) throws IOException {
         int opcaoPratos;
         do {
@@ -299,15 +306,18 @@ public class Menu {
                     System.out.println("Prato registrado com sucesso!");
                     break;
                 case 2:
+                    // Opção para mostrar os pratos cadastrados
                     Prato.mostrarPratos(arquivoPratos);
                     break;
                 case 3:
+                    // Opção para excluir um prato
                     Prato.mostrarPratos(arquivoPratos);
                     System.out.println("Digite a posição do prato que deseja excluir: ");
                     int posicao = Integer.parseInt(scan.nextLine()) - 1;
                     FileManager.deletarItem(arquivoPratos, posicao);
                     break;
                 case 4:
+                    // Opção para buscar pratos por ingrediente
                     Ingredientes.mostrarIngredientes(arquivoIngredientes);
                     int posicaoIngrediente = Integer.parseInt(scan.nextLine()) -1;
                     Prato.buscarPorIngrediente(arquivoIngredientes, arquivoPratos, posicaoIngrediente);
@@ -319,7 +329,7 @@ public class Menu {
         } while (opcaoPratos != 0);
 
     }
-
+    // Mostra o menu de bebidas disponiveis
     public static void menuBebida(Scanner scan, File arquivoBebidas) throws IOException {
         int opcaoBebida;
         do {
@@ -366,7 +376,7 @@ public class Menu {
             }
         } while (opcaoBebida != 0);
     }
-
+    //Mostra o menu do pedido onde possibilita cadastrar um pedido, ver os cadastrados, excluir e ver os ordenados por precos
     public static void menuPedido(Scanner scan, File arquivoPedidos, File arquivoFuncionario, File arquivoCliente,
             File arquivoPratos,
             File arquivoBebidas) throws IOException {
